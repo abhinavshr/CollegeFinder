@@ -24,10 +24,22 @@
             <li><a href="#course-management"><span class="material-symbols-outlined">menu_book</span>Course Management</a></li>
             <li><a href="{{ route('admin.adminlist') }}"><span class="material-symbols-outlined">list</span> Admin List</a></li>
             <li><a href="#user-list"><span class="material-symbols-outlined">list</span> User List</a></li>
-            <li><a href="#setting"><span class="material-symbols-outlined">settings</span> Setting</a></li>
+            <li><a href=" {{ route('collegeadmin.profile') }} "><span class="material-symbols-outlined">settings</span> Setting</a></li>
         </ul>
         <div class="logout">
-            <a href="#logout"><span class="material-symbols-outlined">logout</span> Logout</a>
+            @auth('collegeadmin')
+            <form action="{{ route('collegeadmin.collegeadminlogout') }}" method="POST">
+                @csrf
+                <button type="submit" class="logout"><span class="material-symbols-outlined">logout</span> College Admin Logout</button>
+            </form>
+            @endauth
+
+            @auth('admin')
+            <form action="{{ route('admin.adminlogout') }}" method="POST">
+                @csrf
+                <button type="submit" class="logout"><span class="material-symbols-outlined">logout</span> Logout</button>
+            </form>
+            @endauth
         </div>
     </div>
 </body>

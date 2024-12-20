@@ -69,17 +69,11 @@ body {
 
   .logout {
     padding: 20px;
-  }
-
-  .logout a {
-    text-decoration: none;
+    background-color: #0056b3;
+    border: none;
     color: white;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
   }
 
-  .logout a:hover {
+  .logout button:hover{
     background-color: #004099;
-    cursor: pointer;
   }

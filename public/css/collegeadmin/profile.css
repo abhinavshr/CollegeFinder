@@ -1,0 +1,145 @@
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+
+    .sidenav {
+        width: 250px;
+        background-color: #0056b3;
+        color: white;
+        height: 100vh;
+        position: fixed;
+    }
+
+    .profile-container {
+        margin-left: 250px;
+        padding: 20px;
+    }
+
+    .profile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 15px;
+    }
+
+    .profile-header img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+    }
+
+    .profile-header .college-info {
+        flex: 1;
+        margin-left: 15px;
+    }
+
+    .profile-header .college-info h2 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .profile-header .college-info p {
+        margin: 5px 0 0;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .edit-icon {
+        cursor: pointer;
+        color: #007bff;
+        font-size: 14px;
+        background: none;
+        border: none;
+        text-decoration: underline;
+    }
+
+    .section {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+    }
+
+    .section h3 {
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+    }
+
+    .section div {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    .section div label {
+        flex: 1;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .section div input {
+        flex: 2;
+        padding: 8px;
+        margin-left: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .password-section {
+        display: flex;
+        gap: 10px;
+    }
+
+    .password-section input {
+        flex: 1;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .buttons button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .update-btn {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .cancel-btn {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .delete-btn {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        background-color: #dc3545;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .delete-btn:hover {
+        background-color: #c82333;
+    }

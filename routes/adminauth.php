@@ -16,4 +16,5 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('adminlist', [AdminlistController::class, 'adminlistindex'])->name('adminlist');
     Route::get('collegeadminregister',[CollegeAdminController::class, 'collegeadminregisterindex'])->name('collegeadminregister');
     Route::post('collegeadminregister', [CollegeAdminController::class, 'collegeadminregister'])->name('collegeadminregister');
+    Route::post('adminlogout', [AdminController::class, 'adminlogout'])->name('adminlogout');
 });

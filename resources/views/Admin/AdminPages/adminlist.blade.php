@@ -17,9 +17,11 @@
         <div class="header">
             <h1>Manage Admins</h1>
             <span class="sub-header">{{ $CollegeAdmins->count() }} Admins</span>
+            @auth('admin')
             <a href=" {{ route('admin.collegeadminregister') }} " style=" text-decoration: none"><button class="add-admin-btn">
                 <span class="material-symbols-outlined">add</span> Add Admins
             </button></a>
+            @endauth
         </div>
 
         <table class="admin-table">

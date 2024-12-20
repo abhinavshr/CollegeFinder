@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 require __DIR__.'/adminauth.php';
+require __DIR__.'/collegeadminauth.php';

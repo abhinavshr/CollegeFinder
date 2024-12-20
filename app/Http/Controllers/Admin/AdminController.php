@@ -49,4 +49,11 @@ class AdminController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ]);
     }
+
+    public function adminlogout(Request $request){
+        Auth::guard('admin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('admin.adminlogin');
+    }
 }
