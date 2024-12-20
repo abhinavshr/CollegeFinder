@@ -24,7 +24,9 @@
             <li><a href="#course-management"><span class="material-symbols-outlined">menu_book</span>Course Management</a></li>
             <li><a href="{{ route('admin.adminlist') }}"><span class="material-symbols-outlined">list</span> Admin List</a></li>
             <li><a href="#user-list"><span class="material-symbols-outlined">list</span> User List</a></li>
+            @auth('collegeadmin')
             <li><a href=" {{ route('collegeadmin.profile') }} "><span class="material-symbols-outlined">settings</span> Setting</a></li>
+            @endauth
         </ul>
         <div class="logout">
             @auth('collegeadmin')

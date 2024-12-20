@@ -16,4 +16,7 @@ Route::prefix('collegeadmin')->name('collegeadmin.')->middleware('auth:collegead
     Route::get('profile', [ProfileController::class, 'profileindex'])->name('profile');
     Route::put('/profile/update', [ProfileController::class, 'profileupdate'])->name('profile.update');
     Route::post('collegeadminlogout', [CollegeAdminController::class, 'collegeadminlogout'])->name('collegeadminlogout');
+    Route::put('/collegeadmin/profile/personal-update', [ProfileController::class, 'profilePersonalUpdate'])->name('profile.personalupdate');
+    Route::put('/collegeadmin/profile/password-update', [ProfileController::class, 'profilePasswordUpdate'])->name('profile.passwordupdate');
+    Route::delete('/collegeadmin/profile/delete', [ProfileController::class, 'profileDelete'])->name('profile.delete');
 });
