@@ -20,7 +20,7 @@
         </div>
         <ul class="menu">
             <li><a href="#admin-dashboard"><span class="material-symbols-outlined">home</span> Admin Dashboard</a></li>
-            <li><a href="#college-management"><span class="material-symbols-outlined">school</span> College Management</a></li>
+            <li><a href=" {{ route('collegeadmin.collegelist') }} "><span class="material-symbols-outlined">school</span> College Management</a></li>
             <li><a href="#course-management"><span class="material-symbols-outlined">menu_book</span>Course Management</a></li>
             <li><a href="{{ route('admin.adminlist') }}"><span class="material-symbols-outlined">list</span> Admin List</a></li>
             <li><a href="#user-list"><span class="material-symbols-outlined">list</span> User List</a></li>

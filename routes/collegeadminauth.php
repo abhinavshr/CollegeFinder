@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Pages\AdminlistController;
 use App\Http\Controllers\CollegeAdmin\CollegeAdminController;
+use App\Http\Controllers\CollegeAdmin\CollegeController;
 use App\Http\Controllers\CollegeAdmin\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,9 @@ Route::prefix('collegeadmin')->name('collegeadmin.')->middleware('auth:collegead
     Route::put('/collegeadmin/profile/personal-update', [ProfileController::class, 'profilePersonalUpdate'])->name('profile.personalupdate');
     Route::put('/collegeadmin/profile/password-update', [ProfileController::class, 'profilePasswordUpdate'])->name('profile.passwordupdate');
     Route::delete('/collegeadmin/profile/delete', [ProfileController::class, 'profileDelete'])->name('profile.delete');
+    Route::get('collegelist', [CollegeController::class, 'collegeviewindex'])->name('collegelist');
+    Route::get('collegeadd', [CollegeController::class, 'addcollegeindex'])->name('collegeadd');
+    Route::post('collegeadd', [CollegeController::class, 'addcollegestore'])->name('collegeadd.store');
+    Route::delete('collegedelete', [CollegeController::class, 'collegedelete'])->name('collegedelete');
+    Route::get('collegedetail/{id}', [CollegeController::class, 'collegedetails'])->name('collegedetail');
 });
