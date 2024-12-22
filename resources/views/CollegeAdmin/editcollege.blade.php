@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <h1 class="edit-college-header">Edit College</h1>
-        <form action="  " method="POST" enctype="multipart/form-data">
+        <form action=" {{ route('collegeadmin.collegedetail.update', $colleges->id) }} " method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <table>

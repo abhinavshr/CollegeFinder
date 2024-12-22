@@ -14,8 +14,12 @@
         <h1>Hello, Username</h1>
         <div class="search-container">
             <input type="text" placeholder="Search College">
+            @auth('admin')
+            @else
             <a href=" {{ route('collegeadmin.collegeadd') }} "><button type="submit">Add College</button></a>
+            @endauth
         </div>
+        @if (count($colleges) > 0)
         <table>
             <thead>
                 <tr>
@@ -37,17 +41,25 @@
                     <td>{{ $college->updated_at ? $college->updated_at->format('Y/m/d') : '' }}</td>
                     <td>{{ $college->updated_at ? $college->updated_at->diffForHumans() : '' }}</td>
                     <td class="action-buttons">
-                        <a href=" {{ route('collegeadmin.collegedetail', $college->id) }}"><button class="edit-btn">Edit</button></a>
-                        <form action="{{ route('collegeadmin.collegedelete', $college->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this college?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="delete-btn">Delete</button>
-                        </form>
+                        @auth('collegeadmin')
+                            <a href=" {{ route('collegeadmin.collegedetail', $college->id) }}"><button class="edit-btn">Edit</button></a>
+                            <form action="{{ route('collegeadmin.collegedelete', $college->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this college?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="delete-btn">Delete</button>
+                            </form>
+                        @else
+                            <span>Administrators do not have access to this functionality</span>
+                        @endauth
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        @else
+        <p class="error">There are no colleges registered.</p>
+        @endif
     </div>
 </body>
 </html>
+

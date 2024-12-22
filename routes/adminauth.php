@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Pages\AdminlistController;
 use App\Http\Controllers\CollegeAdmin\CollegeAdminController;
+use App\Http\Controllers\CollegeAdmin\CollegeController;
+use App\Http\Controllers\CollegeAdmin\CourseController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -17,4 +19,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('collegeadminregister',[CollegeAdminController::class, 'collegeadminregisterindex'])->name('collegeadminregister');
     Route::post('collegeadminregister', [CollegeAdminController::class, 'collegeadminregister'])->name('collegeadminregister');
     Route::post('adminlogout', [AdminController::class, 'adminlogout'])->name('adminlogout');
+    Route::get('collegelist', [CollegeController::class, 'collegeviewindex'])->name('collegelist');
+    Route::get('courselist', [CourseController::class, 'courseviewindex'])->name('courselist');
 });

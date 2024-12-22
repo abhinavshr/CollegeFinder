@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Pages\AdminlistController;
 use App\Http\Controllers\CollegeAdmin\CollegeAdminController;
 use App\Http\Controllers\CollegeAdmin\CollegeController;
+use App\Http\Controllers\CollegeAdmin\CourseController;
 use App\Http\Controllers\CollegeAdmin\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,11 @@ Route::prefix('collegeadmin')->name('collegeadmin.')->middleware('auth:collegead
     Route::post('collegeadd', [CollegeController::class, 'addcollegestore'])->name('collegeadd.store');
     Route::delete('collegedelete', [CollegeController::class, 'collegedelete'])->name('collegedelete');
     Route::get('collegedetail/{id}', [CollegeController::class, 'collegedetails'])->name('collegedetail');
+    Route::put('collegedetail/{id}', [CollegeController::class, 'collegedetailsupdate'])->name('collegedetail.update');
+    Route::get('courselist', [CourseController::class, 'courseviewindex'])->name('courselist');
+    Route::get('courseadd', [CourseController::class, 'addcourseindex'])->name('courseadd');
+    Route::post('courseadd', [CourseController::class, 'coursestore'])->name('courseadd.store');
+    Route::delete('/course/{id}', [CourseController::class, 'coursedelete'])->name('coursedelete');
+    Route::get('coursedetail/{id}', [CourseController::class, 'coursedetails'])->name('coursedetail');
+    Route::put('/collegeadmin/course/{id}', [CourseController::class, 'update'])->name('course.update');
 });

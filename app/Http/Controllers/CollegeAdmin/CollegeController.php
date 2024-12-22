@@ -98,4 +98,40 @@ class CollegeController extends Controller
         $colleges = Colleges::find($id);
         return view('collegeadmin.editcollege', compact('colleges'));
     }
+
+    public function collegedetailsupdate(Request $request, $id){
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'location' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'contact_email' => 'required|email|max:255',
+        'contact_phone' => 'required|string|max:255',
+        'website' => 'nullable|url|max:255',
+        'description' => 'nullable|string',
+        'affiliated_university' => 'nullable|string|max:255',
+        'level_of_education' => 'nullable|string|max:255',
+        'course_offered' => 'nullable|string|max:255',
+        'alumni_network' => 'nullable|string|max:255',
+        'placement_availability' => 'nullable|string|max:255',
+        'entrance_exams_required' => 'nullable|string|max:255',
+        'country' => 'required|string|max:255',
+    ]);
+
+    if ($request->hasFile('logo')) {
+        $image = $request->file('logo');
+        $imageName = $validatedData['name'] . '.' . $image->getClientOriginalExtension();
+        $request->file('logo')->storeAs('public/images/college/logo', $imageName);
+        $validatedData['logo'] = $imageName;
+    }
+
+    $college = Colleges::find($id);
+    if (!$college) {
+        return redirect()->route('collegeadmin.collegelist')->with('error', 'College not found!');
+    }
+
+    $college->update($validatedData);
+
+    return redirect()->route('collegeadmin.collegelist')->with('success', 'College updated successfully!');
+
+    }
 }
