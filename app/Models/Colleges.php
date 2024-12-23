@@ -34,4 +34,10 @@ class Colleges extends Model
     {
         return $this->belongsTo(CollegeAdmin::class, 'college_admin_id');
     }
+
+    public function scholarships()
+{
+    return $this->hasMany(Scholarships::class);
+}
+
 }

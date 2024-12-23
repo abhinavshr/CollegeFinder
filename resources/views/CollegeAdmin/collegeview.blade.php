@@ -11,7 +11,8 @@
         @include('Admin.shared.SideNav')
     </div>
     <div class="container">
-        <h1>Hello, Username</h1>
+        <h1>Hello, {{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</h1>
+        <h1 class="college-management-header">College Management</h1>
         <div class="search-container">
             <input type="text" placeholder="Search College">
             @auth('admin')

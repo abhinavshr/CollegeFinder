@@ -5,6 +5,7 @@ use App\Http\Controllers\CollegeAdmin\CollegeAdminController;
 use App\Http\Controllers\CollegeAdmin\CollegeController;
 use App\Http\Controllers\CollegeAdmin\CourseController;
 use App\Http\Controllers\CollegeAdmin\ProfileController;
+use App\Http\Controllers\ScholarshipController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('collegeadmin')->name('collegeadmin.')->group(function () {
@@ -33,4 +34,11 @@ Route::prefix('collegeadmin')->name('collegeadmin.')->middleware('auth:collegead
     Route::delete('/course/{id}', [CourseController::class, 'coursedelete'])->name('coursedelete');
     Route::get('coursedetail/{id}', [CourseController::class, 'coursedetails'])->name('coursedetail');
     Route::put('/collegeadmin/course/{id}', [CourseController::class, 'update'])->name('course.update');
+    Route::get('scholarshiplist', [ScholarshipController::class, 'scholarshipviewindex'])->name('scholarshiplist');
+    Route::get('scholarshipadd', [ScholarshipController::class, 'addscholarshipindex'])->name('scholarshipadd');
+    Route::post('scholarshipadd', [ScholarshipController::class, 'addscholarshipstore'])->name('scholarshipadd.store');
+    Route::delete('/scholarships/{id}', [ScholarshipController::class, 'destroy'])->name('scholarships.destroy');
+    Route::get('scholarshipdetail/{id}', [ScholarshipController::class, 'scholarshipdetails'])->name('scholarshipdetail');
+    Route::put('/scholarships/{id}', [ScholarshipController::class, 'update'])->name('scholarshipupdate.update');
+
 });

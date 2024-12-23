@@ -46,6 +46,14 @@
                 @endauth
             </li>
             <li><a href="#user-list"><span class="material-symbols-outlined">list</span> User List</a></li>
+            <li>
+                @auth('admin')
+                    <a href=" {{ route('admin.scholarshiplist') }} "><span class="material-symbols-outlined"> social_leaderboard </span> Scholarship</a>
+                @endauth
+                @auth('collegeadmin')
+                    <a href=" {{ route('collegeadmin.scholarshiplist') }} "><span class="material-symbols-outlined"> social_leaderboard </span> Scholarship</a>
+                @endauth
+            </li>
             @auth('collegeadmin')
             <li><a href=" {{ route('collegeadmin.profile') }} "><span class="material-symbols-outlined">settings</span> Setting</a></li>
             @endauth

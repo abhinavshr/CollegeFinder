@@ -11,7 +11,8 @@
         @include('Admin.shared.SideNav')
     </div>
   <div class="container">
-    <h1>Course Management</h1>
+    <h1>Hello, {{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</h1>
+    <h1 class="course-management-header">Course Management</h1>
     @auth('collegeadmin')
     <a href=" {{ route('collegeadmin.courseadd') }} " class="add-course-btn">Add Course</a>
     @endauth
