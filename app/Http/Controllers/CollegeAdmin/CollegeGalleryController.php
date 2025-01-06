@@ -10,18 +10,42 @@ use Illuminate\Http\Request;
 class CollegeGalleryController extends Controller
 {
 
-    public function collegegalleryindex()
+    // public function collegegalleryindex()
+    // {
+    //     $collegeGallerys = CollegeGallery::all();
+    //     return view('collegeAdmin.collegegallery', compact('collegeGallerys'));
+    // }
+    public function collegegalleryindex(Request $request)
     {
-        $collegeGallerys = CollegeGallery::all();
-        return view('collegeAdmin.collegegallery', compact('collegeGallerys'));
+        $query = CollegeGallery::query();
+
+        if ($request->has('search') && $request->input('search') !== '') {
+            $searchTerm = $request->input('search');
+
+            // Join with the correct table and search by college name
+            $query->join('colleges', 'collegegallerys.college_id', '=', 'colleges.id')
+                ->where('colleges.name', 'like', '%' . $searchTerm . '%');
+        }
+
+        $collegeGallerys = $query->get();
+
+        // Check if there are no gallery images found and pass a flag to the view
+        $noImagesFound = $collegeGallerys->isEmpty();
+
+        return view('collegeAdmin.collegegallery', compact('collegeGallerys', 'noImagesFound'));
     }
 
-    public function addcolegegalleryindex(){
+
+
+
+    public function addcolegegalleryindex()
+    {
         $colleges = Colleges::all();
         return view('CollegeAdmin.addcollegegallery', compact('colleges'));
     }
 
-    public function collegegallerystore(Request $request){
+    public function collegegallerystore(Request $request)
+    {
         $request->validate([
             'college_id' => 'required|exists:colleges,id',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -43,21 +67,19 @@ class CollegeGalleryController extends Controller
         }
 
         return redirect()->back()->with('error', 'Image upload failed. Please try again.');
-
     }
 
-public function collegegallerydelete($id)
-{
-    $gallery = CollegeGallery::findOrFail($id);
+    public function collegegallerydelete($id)
+    {
+        $gallery = CollegeGallery::findOrFail($id);
 
-    $imagePath = storage_path('app/public/images/college/college_gallery/' . $gallery->image);
-    if (file_exists($imagePath)) {
-        unlink($imagePath);
+        $imagePath = storage_path('app/public/images/college/college_gallery/' . $gallery->image);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+        $gallery->delete();
+
+        return redirect()->route('collegeadmin.collegegallery')->with('success', 'Gallery entry deleted successfully.');
     }
-
-    $gallery->delete();
-
-    return redirect()->route('collegeadmin.collegegallery')->with('success', 'Gallery entry deleted successfully.');
-}
-
 }

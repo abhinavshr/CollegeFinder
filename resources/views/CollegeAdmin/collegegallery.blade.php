@@ -4,7 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>College Gallery</title>
-    <link rel="stylesheet" href=" {{ asset('css/collegeadmin/collegegallery.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/collegeadmin/collegegallery.css') }}">
+    <script>
+        // JavaScript function to filter images based on the search term
+        function performSearch() {
+            let searchTerm = document.getElementById("search").value.toLowerCase(); // Get the search term
+            let cards = document.querySelectorAll(".card"); // Get all cards
+            let noResultsMessage = document.getElementById("noResultsMessage");
+
+            let found = false;
+
+            // Loop through all cards and hide/show based on search term
+            cards.forEach(function(card) {
+                let collegeName = card.querySelector("h3").textContent.toLowerCase(); // Get the college name
+                if (collegeName.includes(searchTerm)) {
+                    card.style.display = "block"; // Show the card
+                    found = true;
+                } else {
+                    card.style.display = "none"; // Hide the card
+                }
+            });
+
+            // If no cards are found, show the "No Image" message
+            if (found) {
+                noResultsMessage.style.display = "none";
+            } else {
+                noResultsMessage.style.display = "block";
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="sidenav">
@@ -19,15 +47,17 @@
 
     <div class="container">
         <div class="search-bar">
-            <input type="text" placeholder="Search College">
-            <a href=" {{ route('collegeadmin.addcollegegallery') }} "><button>Add Image</button></a>
+            <input type="text" id="search" placeholder="Search College" onkeyup="performSearch()" value="{{ request('search') }}">
+            <a href="{{ route('collegeadmin.addcollegegallery') }}"><button>Add Image</button></a>
         </div>
 
         <div class="grid">
+            <p id="noResultsMessage" style="display: none;">There is no image of this college.</p>
+
             @foreach ($collegeGallerys as $collegeGallery)
             <div class="card">
-                <img src="{{ asset('storage/images/college/college_gallery/' . $collegeGallery->image) }}" alt="{{ \App\Models\Colleges::find($collegeGallery->college_id)->name }}">
-                <h3>{{ \App\Models\Colleges::find($collegeGallery->college_id)->name }}</h3>
+                <img src="{{ asset('storage/images/college/college_gallery/' . $collegeGallery->image) }}" alt="{{ $collegeGallery->college->name }}">
+                <h3>{{ $collegeGallery->college->name }}</h3>
                 <p>{{ $collegeGallery->caption }}</p>
                 <form action="{{ route('collegeadmin.collegegallery.delete', $collegeGallery->id) }}" method="POST">
                     @csrf
@@ -38,5 +68,6 @@
             @endforeach
         </div>
     </div>
+
 </body>
 </html>

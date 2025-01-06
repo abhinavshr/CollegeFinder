@@ -14,12 +14,23 @@
         <h1>Hello, {{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</h1>
         <h1 class="college-management-header">College Management</h1>
         <div class="search-container">
-            <input type="text" placeholder="Search College">
+            <form action="{{ route('collegeadmin.collegelist') }}" method="GET" id="search-form">
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search College"
+                    value="{{ $search ?? '' }}"
+                    oninput="document.getElementById('search-form').submit()"
+                >
+            </form>
             @auth('admin')
             @else
-            <a href=" {{ route('collegeadmin.collegeadd') }} "><button type="submit">Add College</button></a>
+            <a href="{{ route('collegeadmin.collegeadd') }}">
+                <button type="button">Add College</button>
+            </a>
             @endauth
         </div>
+
         @if (count($colleges) > 0)
         <table>
             <thead>

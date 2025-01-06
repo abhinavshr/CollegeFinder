@@ -34,7 +34,7 @@
           <td>{{ $scholarships->college->name }}</td>
           <td>
             @auth('collegeadmin')
-              <a href=" {{ route('collegeadmin.scholarshipdetail', $scholarships->id) }} " class="action-btn edit-btn">Edit</a>
+              <a href=" {{ route('collegeadmin.scholarshipdetail', $scholarships->id) }} " style="text-decoration: none;" class="action-btn edit-btn">Edit</a>
               <form action=" {{ route('collegeadmin.scholarships.destroy', $scholarships->id) }} " method="POST" onsubmit="return confirm('Are you sure you want to delete this course?');">
                 @csrf
                 @method('DELETE')

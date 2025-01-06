@@ -16,4 +16,10 @@ class CollegeGallery extends Model
         'image',
         'caption',
     ];
+
+    public function college()
+{
+    return $this->belongsTo(Colleges::class);
+}
+
 }

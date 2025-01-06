@@ -10,11 +10,26 @@ use Illuminate\Support\Facades\File;
 
 class CollegeController extends Controller
 {
-    public function collegeviewindex()
-    {
-        $colleges = Colleges::all();
-        return view('collegeadmin.collegeview', compact('colleges'));
-    }
+    // public function collegeviewindex()
+    // {
+    //     $colleges = Colleges::all();
+    //     return view('collegeadmin.collegeview', compact('colleges'));
+    // }
+    public function collegeviewindex(Request $request)
+{
+    $search = $request->input('search');
+
+    $colleges = Colleges::query()
+        ->when($search, function ($query, $search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('location', 'like', "%{$search}%")
+                ->orWhere('city', 'like', "%{$search}%");
+        })
+        ->get();
+
+    return view('collegeadmin.collegeview', compact('colleges', 'search'));
+}
+
 
     public function addcollegeindex()
     {

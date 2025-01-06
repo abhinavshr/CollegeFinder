@@ -40,7 +40,7 @@ h1 {
 }
 
 .search-container input {
-    width: 70%;
+    width: 60vw;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
