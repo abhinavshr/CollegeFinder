@@ -51,6 +51,10 @@ class CollegeAdminController extends Controller
 
     public function admincollegelogin()
     {
+        if (Auth::guard('collegeadmin')->check()) {
+            return redirect()->route('collegeadmin.dashboard');
+        }
+
         return view('collegeadmin.collegeadminlogin');
     }
 
@@ -66,7 +70,7 @@ class CollegeAdminController extends Controller
 
         if (Auth::guard('collegeadmin')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('collegeadmin.adminlist');
+            return redirect()->route('collegeadmin.dashboard');
         }
 
         return back()->withErrors([

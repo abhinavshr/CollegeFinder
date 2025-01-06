@@ -19,7 +19,14 @@
             </div>
         </div>
         <ul class="menu">
-            <li><a href="#admin-dashboard"><span class="material-symbols-outlined">home</span> Admin Dashboard</a></li>
+            <li>
+                @auth('admin')
+                    <a href="{{ route('admin.dashboard') }}"><span class="material-symbols-outlined">home</span> Admin Dashboard</a>
+                @endauth
+                @auth('collegeadmin')
+                    <a href="{{ route('collegeadmin.dashboard') }}"><span class="material-symbols-outlined">home</span> College Admin Dashboard</a>
+                @endauth
+            </li>
             <li>
                 @auth('admin')
                     <a href="{{ route('admin.collegelist') }}"><span class="material-symbols-outlined">school</span> College Management</a>
@@ -54,6 +61,14 @@
                     <a href=" {{ route('collegeadmin.scholarshiplist') }} "><span class="material-symbols-outlined"> social_leaderboard </span> Scholarship</a>
                 @endauth
             </li>
+            <li>
+                @auth('admin')
+                    <a href=""><span class="material-symbols-outlined">gallery_thumbnail</span> College Gallery</a>
+                @endauth
+                @auth('collegeadmin')
+                    <a href=" {{ route('collegeadmin.collegegallery') }} "><span class="material-symbols-outlined">gallery_thumbnail</span> College Gallery</a>
+                @endauth
+            </li>
             @auth('collegeadmin')
             <li><a href=" {{ route('collegeadmin.profile') }} "><span class="material-symbols-outlined">settings</span> Setting</a></li>
             @endauth
@@ -77,3 +92,5 @@
 </body>
 
 </html>
+
+

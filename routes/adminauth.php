@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Pages\AdminlistController;
 use App\Http\Controllers\CollegeAdmin\CollegeAdminController;
 use App\Http\Controllers\CollegeAdmin\CollegeController;
 use App\Http\Controllers\CollegeAdmin\CourseController;
+use App\Http\Controllers\collegeAdmin\DashboardController;
 use App\Http\Controllers\ScholarshipController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,5 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('collegelist', [CollegeController::class, 'collegeviewindex'])->name('collegelist');
     Route::get('courselist', [CourseController::class, 'courseviewindex'])->name('courselist');
     Route::get('scholarshiplist', [ScholarshipController::class, 'scholarshipviewindex'])->name('scholarshiplist');
+    Route::get('dashboard', [DashboardController::class, 'dashboardindex'])->name('dashboard');
 });

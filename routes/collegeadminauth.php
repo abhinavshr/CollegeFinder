@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\Pages\AdminlistController;
 use App\Http\Controllers\CollegeAdmin\CollegeAdminController;
 use App\Http\Controllers\CollegeAdmin\CollegeController;
+use App\Http\Controllers\collegeAdmin\CollegeGalleryController;
 use App\Http\Controllers\CollegeAdmin\CourseController;
+use App\Http\Controllers\collegeAdmin\DashboardController;
 use App\Http\Controllers\CollegeAdmin\ProfileController;
 use App\Http\Controllers\ScholarshipController;
 use Illuminate\Support\Facades\Route;
@@ -40,5 +42,9 @@ Route::prefix('collegeadmin')->name('collegeadmin.')->middleware('auth:collegead
     Route::delete('/scholarships/{id}', [ScholarshipController::class, 'destroy'])->name('scholarships.destroy');
     Route::get('scholarshipdetail/{id}', [ScholarshipController::class, 'scholarshipdetails'])->name('scholarshipdetail');
     Route::put('/scholarships/{id}', [ScholarshipController::class, 'update'])->name('scholarshipupdate.update');
-
+    Route::get('dashboard', [DashboardController::class, 'dashboardindex'])->name('dashboard');
+    Route::get('collegegallery', [CollegeGalleryController::class, 'collegegalleryindex'])->name('collegegallery');
+    Route::post('collegegallery', [CollegeGalleryController::class, 'collegegallerystore'])->name('college_gallery.store');
+    Route::get('addcollegegallery', [CollegeGalleryController::class, 'addcolegegalleryindex'])->name('addcollegegallery');
+    Route::delete('collegegallery/{id}', [CollegeGalleryController::class, 'collegegallerydelete'])->name('collegegallery.delete');
 });
