@@ -1,0 +1,70 @@
+body{
+    background-image: url("../../images/collegeadmin/scholarship.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.editscholarship-container{
+    width: 40%;
+    background-color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.editscholarship-container h1{
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.editscholarship-container form table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.editscholarship-container form table tr td{
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.editscholarship-container form table tr td:first-child{
+    width: 30%;
+}
+
+.editscholarship-container form table tr td input[type="text"],
+.editscholarship-container form table tr td select,
+.editscholarship-container form table tr td textarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.editscholarship-container form button[type="submit"]{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    display: block;
+}
+
+.editscholarship-container form button[type="submit"]:hover{
+    background-color: #3e8e41;
+}
+
+.error{
+    color: red;
+}
+

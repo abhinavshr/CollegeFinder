@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('../../images/collegeadmin/collegeadminlogin.jpeg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 30px 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .login-container img {
+    width: 60px;
+    margin-bottom: 20px;
+  }
+
+  .login-container h1 {
+    font-size: 24px;
+    color: #0078ff;
+    margin-bottom: 20px;
+  }
+
+  .login-container label {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  .login-container input[type="email"],
+  .login-container input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  .login-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0078ff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .login-container button:hover {
+    background-color: #0056cc;
+  }
+
+  .login-container button:active {
+    background-color: #003f99;
+    transform: scale(0.98);
+  }
+
+  .error{
+      color: red;
+  }
+
+  @media (max-width: 768px) {
+    .login-container {
+      padding: 20px;
+    }
+
+    .login-container h1 {
+      font-size: 20px;
+    }
+
+    .login-container button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }

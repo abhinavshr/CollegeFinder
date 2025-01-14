@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #D2EDFF;
+}
+
+.sidenav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidenav a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.sidenav a:hover {
+    background-color: #34495e;
+}
+
+.container {
+    margin-left: 270px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.course-management-header{
+    color: #0056b3;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1{
+    color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    border: none;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.action-btn {
+    padding: 5px 10px;
+    margin: 2px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .edit-btn {
+    background-color: #ffc107;
+    color: #fff;
+  }
+
+  .edit-btn:hover {
+    background-color: #e0a800;
+  }
+
+  .delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+
+
+.add-course-btn {
+    display: inline-block;
+    margin: 10px 0 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .container {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .sidenav {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidenav a {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .search-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-container input {
+        max-width: 100%;
+    }
+
+    .search-container button {
+        width: 100%;
+    }
+}
