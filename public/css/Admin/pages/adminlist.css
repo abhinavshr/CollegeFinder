@@ -107,3 +107,44 @@ tr:hover td {
     background-color: #f1f1f1;
     transition: background-color 0.3s;
 }
+
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin: 20px 0;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-link {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagination .page-link:hover:not(.disabled) {
+    background-color: #0056b3;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #0056b3;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #0056b3;
+    color: white;
+    cursor: not-allowed;
+    border: none;
+}
+
+.pagination a {
+    text-decoration: none;
+}

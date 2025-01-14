@@ -52,7 +52,14 @@
                     <a href="{{ route('collegeadmin.adminlist') }}"><span class="material-symbols-outlined">list</span> Admin List</a>
                 @endauth
             </li>
-            <li><a href="#user-list"><span class="material-symbols-outlined">list</span> User List</a></li>
+            <li>
+                @auth('admin')
+                    <a href="{{ route('admin.userlist') }}"><span class="material-symbols-outlined">list</span> User List</a>
+                @endauth
+                @auth('collegeadmin')
+                    <a href="{{ route('collegeadmin.userlist') }}"><span class="material-symbols-outlined">list</span> User List</a>
+                @endauth
+            </li>
             <li>
                 @auth('admin')
                     <a href=" {{ route('admin.scholarshiplist') }} "><span class="material-symbols-outlined"> social_leaderboard </span> Scholarship</a>
@@ -63,7 +70,7 @@
             </li>
             <li>
                 @auth('admin')
-                    <a href=""><span class="material-symbols-outlined">gallery_thumbnail</span> College Gallery</a>
+                    <a href=" {{ route('admin.collegegallery') }} "><span class="material-symbols-outlined">gallery_thumbnail</span> College Gallery</a>
                 @endauth
                 @auth('collegeadmin')
                     <a href=" {{ route('collegeadmin.collegegallery') }} "><span class="material-symbols-outlined">gallery_thumbnail</span> College Gallery</a>

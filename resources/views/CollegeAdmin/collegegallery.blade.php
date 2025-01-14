@@ -59,11 +59,13 @@
                 <img src="{{ asset('storage/images/college/college_gallery/' . $collegeGallery->image) }}" alt="{{ $collegeGallery->college->name }}">
                 <h3>{{ $collegeGallery->college->name }}</h3>
                 <p>{{ $collegeGallery->caption }}</p>
+                @auth('collegeadmin')
                 <form action="{{ route('collegeadmin.collegegallery.delete', $collegeGallery->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit">Delete</button>
                 </form>
+                @endauth
             </div>
             @endforeach
         </div>

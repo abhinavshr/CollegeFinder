@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Pages\AdminlistController;
+use App\Http\Controllers\Admin\UserListController;
 use App\Http\Controllers\CollegeAdmin\CollegeAdminController;
 use App\Http\Controllers\CollegeAdmin\CollegeController;
 use App\Http\Controllers\collegeAdmin\CollegeGalleryController;
@@ -47,4 +48,5 @@ Route::prefix('collegeadmin')->name('collegeadmin.')->middleware('auth:collegead
     Route::post('collegegallery', [CollegeGalleryController::class, 'collegegallerystore'])->name('college_gallery.store');
     Route::get('addcollegegallery', [CollegeGalleryController::class, 'addcolegegalleryindex'])->name('addcollegegallery');
     Route::delete('collegegallery/{id}', [CollegeGalleryController::class, 'collegegallerydelete'])->name('collegegallery.delete');
+    Route::get('userlist', [UserListController::class, 'userlistindex'])->name('userlist');
 });

@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Pages\AdminlistController;
+use App\Http\Controllers\Admin\UserListController;
 use App\Http\Controllers\CollegeAdmin\CollegeAdminController;
 use App\Http\Controllers\CollegeAdmin\CollegeController;
+use App\Http\Controllers\collegeAdmin\CollegeGalleryController;
 use App\Http\Controllers\CollegeAdmin\CourseController;
 use App\Http\Controllers\collegeAdmin\DashboardController;
 use App\Http\Controllers\ScholarshipController;
@@ -25,4 +27,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('courselist', [CourseController::class, 'courseviewindex'])->name('courselist');
     Route::get('scholarshiplist', [ScholarshipController::class, 'scholarshipviewindex'])->name('scholarshiplist');
     Route::get('dashboard', [DashboardController::class, 'dashboardindex'])->name('dashboard');
+    Route::get('userlist', [UserListController::class, 'userlistindex'])->name('userlist');
+    Route::get('collegegallery', [CollegeGalleryController::class, 'collegegalleryindex'])->name('collegegallery');
 });
