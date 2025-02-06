@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #D2EDFF;
+}
+
+.contactus-header {
+    color: #0056B3;
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: calc(100% - 80px);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+
+.contact-info, .contact-form {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.contact-info {
+    border-radius: 8px;
+}
+
+.contact-info p {
+    margin: 10px 0;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 20%;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.contact-form button:hover {
+    background-color: #004494;
+}
+
+.contact-form label {
+    margin-top: 14px;
+    display: inline-block;
+}
+
+.email-link, .social-link{
+    text-decoration: none;
+    color: #000000;
+}
+
+.email-link:hover{
+    color: #0056b3;
+}
+
+.facebook:hover{
+    color: #1877F2;
+}
+
+.twitter:hover{
+    color: #1DA1F2;
+}
+
+.instagram:hover{
+    color: #E1306C;
+}
+
+.linkedin:hover{
+    color: #0077B5;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+    display: none; 
+    z-index: 1000;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}

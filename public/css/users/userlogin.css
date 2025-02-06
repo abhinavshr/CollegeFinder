@@ -1,4 +1,4 @@
-body, html {
+body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
@@ -16,7 +16,7 @@ body, html {
   .login-container {
     background-color: white;
     border-radius: 20px;
-    padding: 30px 40px;
+    padding: 20px 30px;
     width: 400px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -78,7 +78,7 @@ body, html {
   }
 
   .login-btn {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 10px;
     background-color: #0056B3;
     color: white;
@@ -87,6 +87,8 @@ body, html {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    display: block;
+    margin: 0 auto;
   }
 
   .login-btn:hover {
@@ -113,4 +115,33 @@ body, html {
 
   .signup-text a:hover {
     text-decoration: underline;
+  }
+
+
+  .password-container {
+    position: relative;
+    width: calc(100% - 20px);
+  }
+
+  .password-container input {
+    width: 100%;
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .toggle-password img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+
+  .toggle-password img:hover {
+    opacity: 1;
   }

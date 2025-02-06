@@ -23,13 +23,19 @@
           <span class="error-message">{{ $message }}</span>
           @enderror
         </div>
-        <div class="input-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="Enter password..." required>
-          @error('password')
-          <span class="error-message">{{ $message }}</span>
-          @enderror
-        </div>
+        <div class="input-group password-group">
+            <label for="password">Password</label>
+            <div class="password-container">
+              <input type="password" id="password" name="password" placeholder="Enter password..." required>
+              <span class="toggle-password">
+                <img src="{{ asset('images/icons/eye.png') }}" id="eye-icon" alt="Show Password">
+              </span>
+            </div>
+            @error('password')
+            <span class="error-message">{{ $message }}</span>
+            @enderror
+          </div>
+
         <button type="submit" class="login-btn">Login</button>
       </form>
       <p class="signup-text">
@@ -37,5 +43,6 @@
       </p>
     </div>
   </div>
+  <script src=" {{asset('js/showpassword.js')}} "></script>
 </body>
 </html>
