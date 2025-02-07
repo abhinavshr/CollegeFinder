@@ -12,8 +12,8 @@
         <ul class="nav-links">
             <li><a href="{{ route('user.home') }}" class="{{ request()->routeIs('user.home') ? 'active' : '' }}">Home</a></li>
             <li><a href="#">Search College</a></li>
-            <li><a href="#">Comparison</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="{{ route('user.compare') }}" class="{{ request()->routeIs('user.compare') ? 'active' : '' }}">Comparison</a></li>
+            <li><a href="{{ route('user.aboutus') }}" class="{{ request()->routeIs('user.aboutus') ? 'active' : '' }}">About Us</a></li>
             <li><a href="{{ route('user.contactus') }}"
                     class="{{ request()->routeIs('user.contactus') ? 'active' : '' }}">Contact Us</a></li>
         </ul>
