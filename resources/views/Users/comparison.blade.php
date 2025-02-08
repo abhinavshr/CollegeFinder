@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Compare College</title>
     <link rel="stylesheet" href="{{ asset('css/Users/comparison.css') }}">
-
 </head>
-
 <body>
     <div class="navbar">
         @include('Users.Shared.Nav')
@@ -33,36 +29,10 @@
             <strong> VS </strong>
             <select name="secondcollege" id="secondcollege">
                 <option value="" disabled selected>Select Second College</option>
+                @foreach ($colleges as $college)
+                    <option value="{{ $college->id }}">{{ $college->name }}</option>
+                @endforeach
             </select>
-
-            <script>
-                document.getElementById('firstcollege').addEventListener('change', (e) => {
-                    const selectedCollege = e.target.value;
-                    const secondCollegeSelect = document.getElementById('secondcollege');
-                    secondCollegeSelect.innerHTML = '';
-                    @foreach ($colleges as $college)
-                        if ({{ $college->id }} !== parseInt(selectedCollege)) {
-                            const option = document.createElement('option');
-                            option.value = {{ $college->id }};
-                            option.text = '{{ $college->name }}';
-                            secondCollegeSelect.appendChild(option);
-                        }
-                    @endforeach
-                });
-                document.getElementById('secondcollege').addEventListener('change', (e) => {
-                    const selectedCollege = e.target.value;
-                    const firstCollegeSelect = document.getElementById('firstcollege');
-                    firstCollegeSelect.innerHTML = '';
-                    @foreach ($colleges as $college)
-                        if ({{ $college->id }} !== parseInt(selectedCollege)) {
-                            const option = document.createElement('option');
-                            option.value = {{ $college->id }};
-                            option.text = '{{ $college->name }}';
-                            firstCollegeSelect.appendChild(option);
-                        }
-                    @endforeach
-                });
-            </script>
         </div>
     </div>
     <div class="table-container">
@@ -113,15 +83,75 @@
             <div class="table-cell college-2 alumni-network">-</div>
         </div>
         <div class="table-row">
-            <div class="table-cell">Semester Fee</div>
-            <div class="table-cell college-1 semester-fee">-</div>
-            <div class="table-cell college-2 semester-fee">-</div>
-        </div>
-        <div class="table-row">
             <div class="table-cell">Placement</div>
             <div class="table-cell college-1 placement">-</div>
             <div class="table-cell college-2 placement">-</div>
         </div>
     </div>
+    <script>
+        document.getElementById('firstcollege').addEventListener('change', function () {
+            fetchCollegeData(this.value, 'college-1');
+        });
+
+        document.getElementById('secondcollege').addEventListener('change', function () {
+            fetchCollegeData(this.value, 'college-2');
+        });
+
+        function fetchCollegeData(collegeId, targetClass) {
+            if (!collegeId) return;
+
+            fetch(`/colleges/${collegeId}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Fetched College Data:', data);
+
+                    if (data.message) {
+                        alert('No college data found');
+                        return;
+                    }
+
+                    document.querySelector(`.${targetClass}.entrance-exam`).textContent = data.entrance_exam || '-';
+                    document.querySelector(`.${targetClass}.affiliated-university`).textContent = data.affiliated_university || '-';
+                    document.querySelector(`.${targetClass}.available-faculties`).textContent = data.avaiable_ficilities || '-';
+                    document.querySelector(`.${targetClass}.scholarship-options`).textContent = (data.scholarship_options.length > 0) ? data.scholarship_options.join(', ') : '-';
+                    document.querySelector(`.${targetClass}.level-of-education`).textContent = data.level_of_education || '-';
+                    document.querySelector(`.${targetClass}.location`).textContent = data.location || '-';
+                    document.querySelector(`.${targetClass}.courses-offered`).textContent = data.courses_offered || '-';
+                    document.querySelector(`.${targetClass}.alumni-network`).textContent = data.alumni_network || '-';
+                    document.querySelector(`.${targetClass}.placement`).textContent = data.placement || '-';
+                })
+                .catch(error => console.error('Error fetching college data:', error));
+        }
+    </script>
+    <script>
+        const firstCollegeSelect = document.getElementById('firstcollege');
+        const secondCollegeSelect = document.getElementById('secondcollege');
+
+        firstCollegeSelect.addEventListener('change', function () {
+            const firstCollegeId = this.value;
+            const secondCollegeOptions = secondCollegeSelect.querySelectorAll('option');
+
+            secondCollegeOptions.forEach(option => {
+                if (option.value === firstCollegeId) {
+                    option.style.display = 'none';
+                } else {
+                    option.style.display = '';
+                }
+            });
+        });
+
+        secondCollegeSelect.addEventListener('change', function () {
+            const secondCollegeId = this.value;
+            const firstCollegeOptions = firstCollegeSelect.querySelectorAll('option');
+
+            firstCollegeOptions.forEach(option => {
+                if (option.value === secondCollegeId) {
+                    option.style.display = 'none';
+                } else {
+                    option.style.display = '';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

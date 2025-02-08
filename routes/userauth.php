@@ -22,4 +22,6 @@ Route::name('user.')->middleware(['auth:web'])->group(function () {
     Route::post('contactus', [ContactUsController::class, 'ContactUsStore'])->name('contactus.store');
     Route::post('userlogout', [UserLoginController::class, 'userlogout'])->name('userlogout');
     Route::get('comparecollege', [ComparisonController::class, 'ComparisonIndex'])->name('compare');
+    Route::get('/colleges/{id}', [ComparisonController::class, 'getCollegeData']);
+
 });

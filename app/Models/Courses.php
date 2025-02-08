@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Courses extends Model
 {
@@ -21,7 +22,8 @@ class Courses extends Model
         'eligibility',
     ];
 
-    public function college(){
-        return $this->belongsTo(Colleges::class);
+    public function college(): BelongsTo
+    {
+        return $this->belongsTo(Colleges::class, 'college_id');
     }
 }

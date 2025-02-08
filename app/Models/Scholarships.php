@@ -20,6 +20,6 @@ class Scholarships extends Model
 
     public function college()
     {
-        return $this->belongsTo(Colleges::class);
+        return $this->belongsTo(Colleges::class, 'college_id');
     }
 }
