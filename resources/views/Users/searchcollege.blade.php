@@ -83,16 +83,19 @@
         </form>
     </div>
     <div class="collegecard-container">
-        @if($colleges->count() > 0)
+        @if ($colleges->count() > 0)
             @foreach ($colleges as $college)
-                <div class="college-card">
-                    <img src="{{ asset('storage/images/college/logo/' . $college->logo) }}" alt="{{ $college->name }} Logo">
-                    <h2>{{ $college->name }}</h2>
-                    <p>{{ $college->location }}, {{ $college->city }}</p>
-                    <button class="love-btn" data-college-id="{{ $college->id }}">
-                        ❤️ Favorite
-                    </button>
-                </div>
+                <a href="{{ route('user.colleges.show', ['id' => $college->id]) }}" style="text-decoration: none">
+                    <div class="college-card">
+                        <img src="{{ asset('storage/images/college/logo/' . $college->logo) }}"
+                            alt="{{ $college->name }} Logo">
+                        <h2>{{ $college->name }}</h2>
+                        <p>{{ $college->location }}, {{ $college->city }}</p>
+                        <button class="love-btn" data-college-id="{{ $college->id }}">
+                            ❤️ Favorite
+                        </button>
+                    </div>
+                </a>
             @endforeach
         @else
             <p>No colleges found matching your search.</p>
@@ -143,4 +146,5 @@
     </div>
 </body>
 <script src=" {{ asset('js/favorite.js') }} "></script>
+
 </html>

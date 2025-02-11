@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\AboutUsController;
+use App\Http\Controllers\User\CollegeDetailsController;
 use App\Http\Controllers\User\ComparisonController;
 use App\Http\Controllers\User\ContactUsController;
 use App\Http\Controllers\User\HomeController;
@@ -27,4 +28,5 @@ Route::name('user.')->middleware(['auth:web'])->group(function () {
     Route::get('comparecollege', [ComparisonController::class, 'ComparisonIndex'])->name('compare');
     Route::get('/colleges/{id}', [ComparisonController::class, 'getCollegeData']);
     Route::post('/toggle-favorite', [SearchCollegeController::class, 'toggleFavorite'])->middleware('auth');
+    Route::get('/colleges/{id}', [CollegeDetailsController::class, 'CollegeDetailsIndex'])->name('colleges.show');
 });
