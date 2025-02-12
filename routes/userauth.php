@@ -5,6 +5,7 @@ use App\Http\Controllers\User\CollegeDetailsController;
 use App\Http\Controllers\User\ComparisonController;
 use App\Http\Controllers\User\ContactUsController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\ReviewsController;
 use App\Http\Controllers\User\SearchCollegeController;
 use App\Http\Controllers\User\UserLoginController;
 use App\Http\Controllers\User\UserRegisterController;
@@ -29,4 +30,5 @@ Route::name('user.')->middleware(['auth:web'])->group(function () {
     Route::get('/colleges/{id}', [ComparisonController::class, 'getCollegeData']);
     Route::post('/toggle-favorite', [SearchCollegeController::class, 'toggleFavorite'])->middleware('auth');
     Route::get('/colleges/{id}', [CollegeDetailsController::class, 'CollegeDetailsIndex'])->name('colleges.show');
+    Route::post('reviews', [ReviewsController::class, 'ReviewStore'])->name('reviews.store');
 });

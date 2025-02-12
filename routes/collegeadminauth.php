@@ -49,4 +49,5 @@ Route::prefix('collegeadmin')->name('collegeadmin.')->middleware('auth:collegead
     Route::get('addcollegegallery', [CollegeGalleryController::class, 'addcolegegalleryindex'])->name('addcollegegallery');
     Route::delete('collegegallery/{id}', [CollegeGalleryController::class, 'collegegallerydelete'])->name('collegegallery.delete');
     Route::get('userlist', [UserListController::class, 'userlistindex'])->name('userlist');
+    Route::post('/userlist/convert', [UserListController::class, 'convertUser'])->name('userlist.convert');
 });

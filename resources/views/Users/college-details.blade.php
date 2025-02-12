@@ -99,6 +99,98 @@
             </div>
         @endforeach
     </div>
+
+    <h2 class="college-gallery">College Gallery</h2>
+
+    <div class="slider-container">
+        <div class="college-gallery-container">
+            @foreach ($galleries as $gallery)
+                <div class="gallery-card">
+                    <img src="{{ asset('storage/images/college/college_gallery/' . $gallery->image) }}"
+                        alt="Gallery Image">
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <h2 class="reviews">Reviews</h2>
+
+    @if (auth()->user()->user_type == 'Alumni')
+        <div class="reviews-container">
+            <form action="{{ route('user.reviews.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                <input type="hidden" name="college_id" value="{{ $college->id }}">
+                <input type="text" id="name" class="name" name="name" placeholder="Enter Your Full Name" >
+                @error('name')
+                    <div class="error" style="color: red">{{ $message }}</div>
+                @enderror
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5">★</label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4">★</label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3">★</label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2">★</label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1">★</label>
+                    @error('rating')
+                        <div class="error" style="color: red">{{ $message }}</div>
+                    @enderror
+                </div>
+                <textarea name="review" class="review" id="review" cols="30" rows="10" placeholder="Enter Your Review here"></textarea>
+                @error('review')
+                    <div class="error" style="color: red">{{ $message }}</div>
+                @enderror
+                <br>
+                <button type="submit" class="submit">Submit Review</button>
+            </form>
+        </div>
+    @endif
+
+    <div class="review-list">
+        @foreach ($reviews as $review)
+            <div class="review-card">
+                <h3 class="review-name">{{ $review->name }}</h3>
+                <p class="review-rating"><strong>Rating:</strong>
+                    @for ($i = 1; $i <= 5; $i++)
+                        <input type="radio" id="star{{ $i }}" name="rating" value="{{ $i }}" {{ $review->rating == $i ? 'checked' : '' }}>
+                        <label class="star" for="star{{ $i }}">★</label>
+                    @endfor
+                </p>
+                <p class="review-text"><strong>Review:</strong> {{ $review->review }} </p>
+            </div>
+        @endforeach
+    </div>
+
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const container = document.querySelector(".college-gallery-container");
+
+        let scrollAmount = 0;
+        let firstImageWidth = document.querySelector(".gallery-card").offsetWidth + 10;
+
+        function slideImages() {
+            scrollAmount += 0.3;
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+
+            if (scrollAmount >= firstImageWidth) {
+                container.appendChild(container.firstElementChild);
+                container.style.transition = "none";
+                container.style.transform = `translateX(0px)`;
+                scrollAmount = 0;
+
+                setTimeout(() => {
+                    container.style.transition = "transform 0.3s linear";
+                }, 50);
+            }
+        }
+
+        setInterval(slideImages, 30);
+    });
+</script>
 
 </html>

@@ -83,6 +83,7 @@ body {
     font-size: 12px;
     text-align: center;
     display: inline-block;
+    border: none;
 }
 
 tr:hover td {
@@ -130,3 +131,8 @@ tr:hover td {
 .pagination a {
     text-decoration: none;
 }
+
+.type-badge:hover{
+    background-color: #e6b800;
+}
+

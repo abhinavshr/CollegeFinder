@@ -35,7 +35,17 @@
                         </td>
                         <td>{{ $user->firstname }} {{ $user->lastname }}</td>
                         <td>{{ $user->email }}</td>
-                        <td><span class="type-badge">{{ $user->user_type }}</span></td>
+                        <td>
+                            <form id="convertForm-{{ $user->id }}" action="{{ route('collegeadmin.userlist.convert') }}" method="POST" style="display: none;">
+                                @csrf
+                                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                <input type="hidden" name="new_type" value="{{ $user->user_type == 'Alumni' ? 'User' : 'Alumni' }}">
+                            </form>
+
+                            <button class="type-badge" onclick="confirmConversion({{ $user->id }}, '{{ $user->user_type }}')">
+                                {{ $user->user_type }}
+                            </button>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -86,5 +96,16 @@
         </div>
     </div>
 </body>
+<script>
+    function confirmConversion(userId, userType) {
+        let message = (userType === "Alumni")
+            ? "Do you want to remove the user from Alumni?"
+            : "Are you sure you want to convert this user to Alumni?";
+
+        if (confirm(message)) {
+            document.getElementById("convertForm-" + userId).submit();
+        }
+    }
+</script>
 
 </html>
