@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compare College</title>
     <link rel="stylesheet" href="{{ asset('css/Users/comparison.css') }}">
 </head>
+
 <body>
     <div class="navbar">
         @include('Users.Shared.Nav')
@@ -89,45 +91,59 @@
         </div>
     </div>
     <script>
-        document.getElementById('firstcollege').addEventListener('change', function () {
+        document.getElementById('firstcollege').addEventListener('change', function() {
             fetchCollegeData(this.value, 'college-1');
         });
 
-        document.getElementById('secondcollege').addEventListener('change', function () {
+        document.getElementById('secondcollege').addEventListener('change', function() {
             fetchCollegeData(this.value, 'college-2');
         });
 
         function fetchCollegeData(collegeId, targetClass) {
             if (!collegeId) return;
 
-            fetch(`/colleges/${collegeId}`)
-                .then(response => response.json())
+            fetch(`/colleges/${collegeId}/data`)
+                .then(response => {
+                    console.log('Response:', response);
+                    return response.text();
+                })
+                .then(text => {
+                    console.log('Raw Response:', text);
+                    try {
+                        return JSON.parse(text);
+                    } catch (error) {
+                        throw new Error('Invalid JSON response');
+                    }
+                })
                 .then(data => {
                     console.log('Fetched College Data:', data);
-
                     if (data.message) {
                         alert('No college data found');
                         return;
                     }
-
                     document.querySelector(`.${targetClass}.entrance-exam`).textContent = data.entrance_exam || '-';
-                    document.querySelector(`.${targetClass}.affiliated-university`).textContent = data.affiliated_university || '-';
-                    document.querySelector(`.${targetClass}.available-faculties`).textContent = data.avaiable_ficilities || '-';
-                    document.querySelector(`.${targetClass}.scholarship-options`).textContent = (data.scholarship_options.length > 0) ? data.scholarship_options.join(', ') : '-';
-                    document.querySelector(`.${targetClass}.level-of-education`).textContent = data.level_of_education || '-';
+                    document.querySelector(`.${targetClass}.affiliated-university`).textContent = data
+                        .affiliated_university || '-';
+                    document.querySelector(`.${targetClass}.available-faculties`).textContent = data
+                        .avaiable_ficilities || '-';
+                    document.querySelector(`.${targetClass}.scholarship-options`).textContent = (data
+                        .scholarship_options.length > 0) ? data.scholarship_options.join(', ') : '-';
+                    document.querySelector(`.${targetClass}.level-of-education`).textContent = data
+                        .level_of_education || '-';
                     document.querySelector(`.${targetClass}.location`).textContent = data.location || '-';
                     document.querySelector(`.${targetClass}.courses-offered`).textContent = data.courses_offered || '-';
                     document.querySelector(`.${targetClass}.alumni-network`).textContent = data.alumni_network || '-';
                     document.querySelector(`.${targetClass}.placement`).textContent = data.placement || '-';
                 })
                 .catch(error => console.error('Error fetching college data:', error));
+
         }
     </script>
     <script>
         const firstCollegeSelect = document.getElementById('firstcollege');
         const secondCollegeSelect = document.getElementById('secondcollege');
 
-        firstCollegeSelect.addEventListener('change', function () {
+        firstCollegeSelect.addEventListener('change', function() {
             const firstCollegeId = this.value;
             const secondCollegeOptions = secondCollegeSelect.querySelectorAll('option');
 
@@ -140,7 +156,7 @@
             });
         });
 
-        secondCollegeSelect.addEventListener('change', function () {
+        secondCollegeSelect.addEventListener('change', function() {
             const secondCollegeId = this.value;
             const firstCollegeOptions = firstCollegeSelect.querySelectorAll('option');
 
@@ -158,4 +174,5 @@
         @include('Users.Shared.Footer')
     </div>
 </body>
+
 </html>

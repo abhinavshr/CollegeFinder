@@ -28,7 +28,7 @@ Route::name('user.')->middleware(['auth:web'])->group(function () {
     Route::post('contactus', [ContactUsController::class, 'ContactUsStore'])->name('contactus.store');
     Route::post('userlogout', [UserLoginController::class, 'userlogout'])->name('userlogout');
     Route::get('comparecollege', [ComparisonController::class, 'ComparisonIndex'])->name('compare');
-    Route::get('/colleges/{id}', [ComparisonController::class, 'getCollegeData']);
+    Route::get('/colleges/{id}/data', [ComparisonController::class, 'getCollegeData'])->name('colleges.data');
     Route::post('/toggle-favorite', [SearchCollegeController::class, 'toggleFavorite'])->middleware('auth');
     Route::get('/colleges/{id}', [CollegeDetailsController::class, 'CollegeDetailsIndex'])->name('colleges.show');
     Route::post('reviews', [ReviewsController::class, 'ReviewStore'])->name('reviews.store');
