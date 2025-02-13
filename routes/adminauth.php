@@ -12,7 +12,7 @@ use App\Http\Controllers\ScholarshipController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('adminregister', [AdminController::class, 'index'])->name('adminregister');
+    //Route::get('adminregister', [AdminController::class, 'index'])->name('adminregister');
     Route::post('adminregister', [AdminController::class, 'register'])->name('adminregister');
     Route::get('adminlogin', [AdminController::class, 'login'])->name('adminlogin');
     Route::post('adminlogin', [AdminController::class, 'logincheck'])->name('adminlogin.check');
