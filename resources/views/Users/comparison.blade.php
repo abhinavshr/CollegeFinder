@@ -153,5 +153,9 @@
             });
         });
     </script>
+
+    <div class="footer">
+        @include('Users.Shared.Footer')
+    </div>
 </body>
 </html>

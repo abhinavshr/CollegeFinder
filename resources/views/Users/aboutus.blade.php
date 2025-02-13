@@ -51,5 +51,9 @@
             <p>Get personalized college recommendations based on your academics, interests, and career goals. Our expert counselors assist with applications and admissions tailored to you.</p>
         </div>
     </div>
+
+    <div class="footer">
+        @include('Users.Shared.Footer')
+    </div>
 </body>
 </html>

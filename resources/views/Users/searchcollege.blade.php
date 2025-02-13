@@ -144,6 +144,10 @@
             </ul>
         </nav>
     </div>
+
+    <div class="footer">
+        @include('Users.Shared.Footer')
+    </div>
 </body>
 <script src=" {{ asset('js/favorite.js') }} "></script>
 

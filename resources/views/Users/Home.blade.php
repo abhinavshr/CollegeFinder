@@ -17,7 +17,7 @@
         <div class="hero-content">
             <h1>Find Your Dream College</h1>
             <p>Explore top colleges and universities across the country. Use our comprehensive college recommendations and resources to make well-informed decisions about your future.</p>
-            <a href="#" class="explore-button">Explore Colleges</a>
+            <a href=" {{ route('user.search.colleges') }} " class="explore-button">Explore Colleges</a>
         </div>
     </div>
 
@@ -37,6 +37,10 @@
             <h3>Recommendation Engine</h3>
             <p>Get personalized college recommendations based on your interests and preferences.</p>
         </div>
+    </div>
+
+    <div class="footer">
+        @include('Users.Shared.Footer')
     </div>
 </body>
 </html>

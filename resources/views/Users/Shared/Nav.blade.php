@@ -8,7 +8,7 @@
 
 <body>
     <nav class="navbar">
-        <div class="brand">College Finder</div>
+        <div class="brand"><a href="{{ route('user.home') }}" style="text-decoration: none; color: white">College Finder</a></div>
         <ul class="nav-links">
             <li><a href="{{ route('user.home') }}" class="{{ request()->routeIs('user.home') ? 'active' : '' }}">Home</a></li>
             <li><a href="{{ route('user.search.colleges') }}" class="{{ request()->routeIs('user.search.colleges') ? 'active' : '' }}">Search College</a></li>
@@ -26,7 +26,7 @@
                             onerror="this.src='{{ asset('images/profile.png') }}'" alt="{{ auth()->user()->username }}">
                     </div>
                     <div id="dropdown-content" class="dropdown-content">
-                        <a href="#">Profile</a>
+                        <a href="{{ route('user.profile') }}">Profile</a>
                         <a href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
                         <form id="logout-form" action="{{ route('user.userlogout') }}" method="POST"
                             style="display: none;">

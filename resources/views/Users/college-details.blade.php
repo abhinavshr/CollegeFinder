@@ -136,13 +136,13 @@
                     <label for="star2">★</label>
                     <input type="radio" id="star1" name="rating" value="1">
                     <label for="star1">★</label>
-                    @error('rating')
-                        <div class="error" style="color: red">{{ $message }}</div>
-                    @enderror
+                    @if ($errors->has('rating'))
+                        <div class="error" style="color: red">{{ $errors->first('rating') }}</div>
+                    @endif
                 </div>
                 <textarea name="review" class="review" id="review" cols="30" rows="10" placeholder="Enter Your Review here"></textarea>
                 @error('review')
-                    <div class="error" style="color: red">{{ $message }}</div>
+                    <div class="error" style="color: red">{{ $message ?? 'Review is required.' }}</div>
                 @enderror
                 <br>
                 <button type="submit" class="submit">Submit Review</button>
@@ -163,6 +163,10 @@
                 <p class="review-text"><strong>Review:</strong> {{ $review->review }} </p>
             </div>
         @endforeach
+    </div>
+
+    <div class="footer" style="margin-top: 20px">
+        @include('Users.Shared.Footer')
     </div>
 
 </body>

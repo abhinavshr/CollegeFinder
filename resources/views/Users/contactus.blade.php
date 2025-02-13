@@ -68,5 +68,8 @@
         </div>
     </div>
 
+    <div class="footer" style="margin-top: 40px">
+        @include('Users.Shared.Footer')
+    </div>
 </body>
 </html>
