@@ -45,5 +45,21 @@ class Colleges extends Model
         return $this->hasMany(Courses::class, 'college_id');
     }
 
+    protected static function booted() {
+        static::created(function ($college) {
+            RecentActivity::create([
+                'activity_type' => 'New College Added',
+                'message' => 'New college "' . $college->name . '" was added.',
+            ]);
+        });
+
+        static::updated(function ($college) {
+            RecentActivity::create([
+                'activity_type' => 'College Info Updated',
+                'message' => 'College "' . $college->name . '" was updated.',
+            ]);
+        });
+    }
+
 
 }

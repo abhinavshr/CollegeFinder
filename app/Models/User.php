@@ -27,6 +27,15 @@ class User extends Authenticatable
         'user_type',
     ];
 
+    protected static function booted() {
+        static::created(function ($user) {
+            RecentActivity::create([
+                'activity_type' => 'New User Registered',
+                'message' => 'New user "' . $user->firstname . $user->lastname . '" registered.',
+            ]);
+        });
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
