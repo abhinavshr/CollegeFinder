@@ -63,6 +63,7 @@
                 <option value="" disabled selected>Choose the Level of Education You Want To Study</option>
                 <option value="undergraduate">Undergraduate</option>
                 <option value="postgraduate">Postgraduate</option>
+                <option value="undergraduate_and_postgraduate">Both</option>
             </select>
             <label for="course_offered">Course Offored</label>
             <select name="course_offered" id="course_offered">
