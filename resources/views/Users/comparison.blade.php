@@ -22,17 +22,17 @@
     <div class="collegecomparisonboox">
         <h2 class="comparison-header">Compare Colleges</h2>
         <div class="comparison-container">
-            <select name="firstcollege" id="firstcollege">
-                <option value="" disabled selected>Select First College</option>
+            <select id="firstcollege">
+                <option value="">Select First College</option>
                 @foreach ($colleges as $college)
-                    <option value="{{ $college->id }}">{{ $college->name }}</option>
+                    <option value="{{ $college->id }}" data-name="{{ $college->name }}">{{ $college->name }}</option>
                 @endforeach
             </select>
             <strong> VS </strong>
-            <select name="secondcollege" id="secondcollege">
-                <option value="" disabled selected>Select Second College</option>
+            <select id="secondcollege">
+                <option value="">Select Second College</option>
                 @foreach ($colleges as $college)
-                    <option value="{{ $college->id }}">{{ $college->name }}</option>
+                    <option value="{{ $college->id }}" data-name="{{ $college->name }}">{{ $college->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -40,8 +40,8 @@
     <div class="table-container">
         <div class="table-row table-header">
             <div class="table-cell">Features</div>
-            <div class="table-cell">College 1</div>
-            <div class="table-cell">College 2</div>
+            <div class="table-cell college-name" id="college1-name">College 1</div>
+            <div class="table-cell college-name" id="college2-name">College 2</div>
         </div>
 
         <div class="table-row">
@@ -91,55 +91,26 @@
         </div>
     </div>
     <script>
-        document.getElementById('firstcollege').addEventListener('change', function() {
-            fetchCollegeData(this.value, 'college-1');
-        });
+        fetch('/colleges/list')
+            .then(response => response.json())
+            .then(colleges => {
+                const firstCollegeSelect = document.getElementById('firstcollege');
+                const secondCollegeSelect = document.getElementById('secondcollege');
 
-        document.getElementById('secondcollege').addEventListener('change', function() {
-            fetchCollegeData(this.value, 'college-2');
-        });
+                colleges.forEach(college => {
+                    let option1 = document.createElement('option');
+                    option1.value = college.id;
+                    option1.textContent = college.name;
+                    option1.dataset.name = college.name;
 
-        function fetchCollegeData(collegeId, targetClass) {
-            if (!collegeId) return;
+                    let option2 = option1.cloneNode(true);
 
-            fetch(`/colleges/${collegeId}/data`)
-                .then(response => {
-                    console.log('Response:', response);
-                    return response.text();
-                })
-                .then(text => {
-                    console.log('Raw Response:', text);
-                    try {
-                        return JSON.parse(text);
-                    } catch (error) {
-                        throw new Error('Invalid JSON response');
-                    }
-                })
-                .then(data => {
-                    console.log('Fetched College Data:', data);
-                    if (data.message) {
-                        alert('No college data found');
-                        return;
-                    }
-                    document.querySelector(`.${targetClass}.entrance-exam`).textContent = data.entrance_exam || '-';
-                    document.querySelector(`.${targetClass}.affiliated-university`).textContent = data
-                        .affiliated_university || '-';
-                    document.querySelector(`.${targetClass}.available-faculties`).textContent = data
-                        .avaiable_ficilities || '-';
-                    document.querySelector(`.${targetClass}.scholarship-options`).textContent = (data
-                        .scholarship_options.length > 0) ? data.scholarship_options.join(', ') : '-';
-                    document.querySelector(`.${targetClass}.level-of-education`).textContent = data
-                        .level_of_education || '-';
-                    document.querySelector(`.${targetClass}.location`).textContent = data.location || '-';
-                    document.querySelector(`.${targetClass}.courses-offered`).textContent = data.courses_offered || '-';
-                    document.querySelector(`.${targetClass}.alumni-network`).textContent = data.alumni_network || '-';
-                    document.querySelector(`.${targetClass}.placement`).textContent = data.placement || '-';
-                })
-                .catch(error => console.error('Error fetching college data:', error));
+                    firstCollegeSelect.appendChild(option1);
+                    secondCollegeSelect.appendChild(option2);
+                });
+            })
+            .catch(error => console.error('Error fetching college list:', error));
 
-        }
-    </script>
-    <script>
         const firstCollegeSelect = document.getElementById('firstcollege');
         const secondCollegeSelect = document.getElementById('secondcollege');
 
@@ -168,11 +139,49 @@
                 }
             });
         });
-    </script>
 
+        function handleCollegeChange(selectElement, targetHeader, targetClass) {
+            let selectedOption = selectElement.options[selectElement.selectedIndex];
+            let collegeName = selectedOption.dataset.name || "{{ $college->name ?? 'College' }}";
+            document.getElementById(targetHeader).textContent = collegeName;
+            fetchCollegeData(selectElement.value, targetClass);
+        }
+
+        document.getElementById('firstcollege').addEventListener('change', function() {
+            handleCollegeChange(this, 'college1-name', 'college-1');
+        });
+
+        document.getElementById('secondcollege').addEventListener('change', function() {
+            handleCollegeChange(this, 'college2-name', 'college-2');
+        });
+
+        function fetchCollegeData(collegeId, targetClass) {
+            if (!collegeId) return;
+
+            fetch(`/colleges/${collegeId}/data`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert('No college data found');
+                        return;
+                    }
+                    document.querySelector(`.${targetClass}.entrance-exam`).textContent = data.entrance_exam || '-';
+                    document.querySelector(`.${targetClass}.affiliated-university`).textContent = data.affiliated_university || '-';
+                    document.querySelector(`.${targetClass}.available-faculties`).textContent = data.avaiable_ficilities || '-';
+                    document.querySelector(`.${targetClass}.scholarship-options`).textContent = data.scholarship_options.length > 0 ? data.scholarship_options.join(', ') : '-';
+                    document.querySelector(`.${targetClass}.level-of-education`).textContent = data.level_of_education === 'undergraduate_and_postgraduate' ? 'Undergraduate And Postgraduate' : data.level_of_education;
+                    document.querySelector(`.${targetClass}.location`).textContent = data.location || '-';
+                    document.querySelector(`.${targetClass}.courses-offered`).textContent = data.courses_offered || '-';
+                    document.querySelector(`.${targetClass}.alumni-network`).textContent = data.alumni_network || '-';
+                    document.querySelector(`.${targetClass}.placement`).textContent = data.placement || '-';
+                })
+                .catch(error => console.error('Error fetching college data:', error));
+        }
+    </script>
     <div class="footer">
         @include('Users.Shared.Footer')
     </div>
 </body>
 
 </html>
+

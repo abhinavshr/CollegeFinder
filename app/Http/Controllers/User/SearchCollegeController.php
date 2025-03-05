@@ -30,7 +30,14 @@ class SearchCollegeController extends Controller
         }
 
         if ($request->has('level_of_education') && !empty($request->input('level_of_education'))) {
-            $query->where('level_of_education', $request->input('level_of_education'));
+            if (in_array($request->input('level_of_education'), ['undergraduate', 'postgraduate'])) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('level_of_education', $request->input('level_of_education'))
+                        ->orWhere('level_of_education', 'undergraduate_and_postgraduate');
+                });
+            } else {
+                $query->where('level_of_education', $request->input('level_of_education'));
+            }
         }
 
         if ($request->has('course_offered') && !empty($request->input('course_offered'))) {
