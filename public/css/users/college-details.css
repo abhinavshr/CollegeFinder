@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,8 +7,61 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #D2EDFF;
+}
+
+.college-basic-info, .academic-details, .career-alumni, .scholarship-container, .review-list {
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.college-basic-info:hover, .academic-details:hover, .career-alumni:hover, .scholarship-card:hover {
+    transform: scale(1.02);
+}
+
+.college-course-offered table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.college-course-offered th {
+    padding: 15px;
+    font-size: 16px;
+}
+
+.slider-container {
+    position: relative;
+}
+
+.gallery-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.gallery-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.reviews-container .submit {
+    font-weight: 600;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.reviews-container .submit:hover {
+    transform: translateY(-2px);
+}
+
+.rating label {
+    font-size: 28px;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.rating label:hover, .rating input:checked ~ label {
+    color: #ffcc00;
+    transform: scale(1.1);
 }
 
 .hero-section {

@@ -48,6 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'collegeadmins',
         ],
+        // 'admin' => [
+        //     'driver' => 'jwt',
+        //     'provider' => 'admins',
+        // ],
     ],
 
 

@@ -73,7 +73,7 @@
                 @foreach ($college->courses as $course)
                     <tr>
                         <td>{{ $course->course_name }}</td>
-                        <td>{{ $course->duration }}</td>
+                        <td>{{ $course->duration }} Years</td>
                         <td>{{ $course->fees }}</td>
                         <td>{{ $course->eligibility }}</td>
                     </tr>
