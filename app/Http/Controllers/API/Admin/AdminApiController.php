@@ -38,29 +38,28 @@ class AdminApiController extends Controller
     }
 
     public function login(Request $request)
-{
-    $credentials = $request->only('email', 'password');
+    {
+        $credentials = $request->only('email', 'password');
 
-    try {
-        if (!$token = Auth::guard('admin')->attempt($credentials)) {
+        try {
+            if (!$token = Auth::guard('admin')->attempt($credentials)) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Invalid credentials'
+                ], 401);
+            }
+        } catch (JWTException $e) {
             return response()->json([
                 'status' => false,
-                'message' => 'Invalid credentials'
-            ], 401);
+                'message' => 'Could not create token',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-    } catch (JWTException $e) {
+
         return response()->json([
-            'status' => false,
-            'message' => 'Could not create token',
-            'error' => $e->getMessage(),
-        ], 500);
+            "status" => true,
+            'message' => 'Admin logged in successfully',
+            'token' => $token
+        ]);
     }
-
-    return response()->json([
-        "status" => true,
-        'message' => 'Admin logged in successfully',
-        'token' => $token
-    ]);
-}
-
 }
