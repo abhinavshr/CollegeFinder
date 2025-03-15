@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 require __DIR__.'/adminauthapi.php';
+require __DIR__.'/collegeadminapiauth.php';

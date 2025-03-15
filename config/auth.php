@@ -49,13 +49,17 @@ return [
         //     'driver' => 'session',
         //     'provider' => 'admins',
         // ],
-        'collegeadmin' => [
-            'driver' => 'session',
-            'provider' => 'collegeadmins',
-        ],
+        // 'collegeadmin' => [
+        //     'driver' => 'session',
+        //     'provider' => 'collegeadmins',
+        // ],
         'admin' => [
             'driver' => 'jwt',
             'provider' => 'admins',
+        ],
+        'collegeadmin' => [
+            'driver' => 'jwt',
+            'provider' => 'collegeadmins',
         ],
     ],
 
