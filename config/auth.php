@@ -40,21 +40,22 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins',
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
         ],
-        // 'collegeadmin' => [
-        //     'driver' => 'session',
-        //     'provider' => 'collegeadmins',
-        // ],
         // 'admin' => [
-        //     'driver' => 'jwt',
+        //     'driver' => 'session',
         //     'provider' => 'admins',
         // ],
         'collegeadmin' => [
-            'driver' => 'jwt',
+            'driver' => 'session',
             'provider' => 'collegeadmins',
+        ],
+        'admin' => [
+            'driver' => 'jwt',
+            'provider' => 'admins',
         ],
     ],
 
