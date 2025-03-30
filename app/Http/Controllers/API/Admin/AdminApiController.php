@@ -18,10 +18,16 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminApiController extends Controller
 {
-
+    /**
+     * Register a new admin.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(Request $request)
     {
         try {
+            // Validate incoming request data
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:admins',
@@ -31,6 +37,7 @@ class AdminApiController extends Controller
             return response()->json(['errors' => $e->errors()], 422);
         }
 
+        // Create new admin record
         $admin = Admins::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
@@ -42,11 +49,18 @@ class AdminApiController extends Controller
         ], 201);
     }
 
+    /**
+     * Admin login and generate JWT token.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
         try {
+            // Authenticate admin
             if (!$token = Auth::guard('admin')->attempt($credentials)) {
                 return response()->json([
                     'status' => false,
@@ -68,12 +82,20 @@ class AdminApiController extends Controller
         ]);
     }
 
+    /**
+     * Store a new college admin.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Request $request)
     {
+        // Check if the admin is authenticated
         if (!Auth::guard('admin')->check()) {
             return response()->json(['message' => 'Unauthorized access'], 403);
         }
 
+        // Validate request data
         $validator = Validator::make($request->all(), [
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -87,6 +109,7 @@ class AdminApiController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
+        // Create college admin record
         $collegeAdmin = CollegeAdmin::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
@@ -102,7 +125,11 @@ class AdminApiController extends Controller
         ], 201);
     }
 
-    public function collegeadminlist(){
+    /**
+     * Fetch list of college admins.
+     */
+    public function collegeadminlist()
+    {
         $collegeadmins = CollegeAdmin::all();
         return response()->json([
             'message' => 'College Admins fetched successfully!',
@@ -110,7 +137,11 @@ class AdminApiController extends Controller
         ], 200);
     }
 
-    public function collegelist(){
+    /**
+     * Fetch list of colleges.
+     */
+    public function collegelist()
+    {
         $colleges = Colleges::all();
         return response()->json([
             'message' => 'Colleges fetched successfully!',
@@ -118,7 +149,11 @@ class AdminApiController extends Controller
         ], 200);
     }
 
-    public function scholarshiplist(){
+    /**
+     * Fetch list of scholarships.
+     */
+    public function scholarshiplist()
+    {
         $scholarships = Colleges::with('scholarships')->get();
         return response()->json([
             'message' => 'Scholarships fetched successfully!',
@@ -126,7 +161,11 @@ class AdminApiController extends Controller
         ], 200);
     }
 
-    public function courselist(){
+    /**
+     * Fetch list of courses.
+     */
+    public function courselist()
+    {
         $courses = Colleges::with('courses')->get();
         return response()->json([
             'message' => 'Courses fetched successfully!',
@@ -134,7 +173,11 @@ class AdminApiController extends Controller
         ], 200);
     }
 
-    public function userlist(){
+    /**
+     * Fetch list of users.
+     */
+    public function userlist()
+    {
         $users = User::all();
         return response()->json([
             'message' => 'Users fetched successfully!',
@@ -142,7 +185,11 @@ class AdminApiController extends Controller
         ], 200);
     }
 
-    public function logout(){
+    /**
+     * Logout the authenticated admin.
+     */
+    public function logout()
+    {
         Auth::guard('admin')->logout();
         return response()->json([
             'message' => 'Admin logged out successfully!',

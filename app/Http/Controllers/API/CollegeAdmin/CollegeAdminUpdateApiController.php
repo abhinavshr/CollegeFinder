@@ -15,10 +15,14 @@ use Illuminate\Http\Request;
 
 class CollegeAdminUpdateApiController extends Controller
 {
+    /**
+     * Update College Admin Profile.
+     */
     public function update(Request $request)
     {
         $collegeAdmin = CollegeAdmin::find(Auth::guard('collegeadmin')->id());
 
+        // Check if College Admin exists
         if (!$collegeAdmin) {
             return response()->json([
                 'status' => false,
@@ -26,6 +30,7 @@ class CollegeAdminUpdateApiController extends Controller
             ], 404);
         }
 
+        // Validate input data
         $validator = Validator::make($request->all(), [
             'firstname' => 'sometimes|string|max:255',
             'lastname' => 'sometimes|string|max:255',
@@ -35,6 +40,7 @@ class CollegeAdminUpdateApiController extends Controller
             'admin_profile' => 'nullable|string|max:255',
         ]);
 
+        // Return validation errors if any
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
@@ -42,6 +48,7 @@ class CollegeAdminUpdateApiController extends Controller
             ], 422);
         }
 
+        // Update College Admin details
         $collegeAdmin->update($request->only([
             'firstname',
             'lastname',
@@ -50,6 +57,7 @@ class CollegeAdminUpdateApiController extends Controller
             'admin_profile'
         ]));
 
+        // Hash password if provided
         if ($request->has('password')) {
             $collegeAdmin->update(['password' => Hash::make($request->password)]);
         }
@@ -61,10 +69,14 @@ class CollegeAdminUpdateApiController extends Controller
         ], 200);
     }
 
+    /**
+     * Update College details by College Admin.
+     */
     public function Collegeupdate(Request $request, $id)
     {
         $collegeAdmin = Auth::guard('collegeadmin')->user();
 
+        // Check if College Admin is authenticated
         if (!$collegeAdmin) {
             return response()->json([
                 'status' => false,
@@ -72,10 +84,12 @@ class CollegeAdminUpdateApiController extends Controller
             ], 401);
         }
 
+        // Fetch college details owned by the logged-in admin
         $college = Colleges::where('id', $id)
             ->where('college_admin_id', $collegeAdmin->id)
             ->first();
 
+        // Check if College exists and belongs to admin
         if (!$college) {
             return response()->json([
                 'status' => false,
@@ -83,6 +97,7 @@ class CollegeAdminUpdateApiController extends Controller
             ], 404);
         }
 
+        // Validate input data
         $validatedData = $request->validate([
             'name' => 'sometimes|required|string|max:255',
             'location' => 'sometimes|required|string|max:255',
@@ -101,6 +116,7 @@ class CollegeAdminUpdateApiController extends Controller
             'country' => 'sometimes|required|string|max:255',
         ]);
 
+        // Update College details
         $college->update($validatedData);
 
         return response()->json([
@@ -110,10 +126,14 @@ class CollegeAdminUpdateApiController extends Controller
         ], 200);
     }
 
+    /**
+     * Delete a College Gallery Image.
+     */
     public function CollegegalleryDelete(Request $request, $id)
     {
         $collegeAdmin = Auth::guard('collegeadmin')->user();
 
+        // Check if College Admin is authenticated
         if (!$collegeAdmin) {
             return response()->json([
                 'status' => false,
@@ -121,17 +141,7 @@ class CollegeAdminUpdateApiController extends Controller
             ], 401);
         }
 
-        $college = Colleges::where('id', $id)
-            ->where('college_admin_id', $collegeAdmin->id)
-            ->first();
-
-        if (!$college) {
-            return response()->json([
-                'status' => false,
-                'message' => 'College not found or access denied'
-            ], 404);
-        }
-
+        // Verify if the gallery exists and belongs to the College Admin's college
         $gallery = CollegeGallery::where('college_id', $id)->where('id', $request->id)->first();
         if ($gallery) {
             $gallery->delete();
@@ -143,117 +153,12 @@ class CollegeAdminUpdateApiController extends Controller
         return response()->json([
             'status' => false,
             'message' => 'Gallery not found'
-        ]);
+        ], 404);
     }
 
-    public function ScholarshipDelete(Request $request, $id)
-    {
-        $collegeAdmin = Auth::guard('collegeadmin')->user();
-
-        if (!$collegeAdmin) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Unauthorized'
-            ], 401);
-        }
-
-        $scholarship = Scholarships::where('id', $id)->first();
-
-        if (!$scholarship) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Scholarship not found'
-            ], 404);
-        }
-
-        $college = Colleges::where('id', $scholarship->college_id)
-            ->where('college_admin_id', $collegeAdmin->id)
-            ->first();
-
-        if (!$college) {
-            return response()->json([
-                'status' => false,
-                'message' => 'College not found or access denied'
-            ], 404);
-        }
-
-        $scholarship->delete();
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Scholarship deleted successfully'
-        ], 200);
-    }
-
-    public function CourseDelete(Request $request, $id)
-    {
-        $collegeAdmin = Auth::guard('collegeadmin')->user();
-
-        if (!$collegeAdmin) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Unauthorized'
-            ], 401);
-        }
-
-        $course = Courses::where('id', $id)->first();
-
-        if (!$course) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Course not found'
-            ], 404);
-        }
-
-        $college = Colleges::where('id', $course->college_id)
-            ->where('college_admin_id', $collegeAdmin->id)
-            ->first();
-
-        if (!$college) {
-            return response()->json([
-                'status' => false,
-                'message' => 'College not found or access denied'
-            ], 404);
-        }
-
-        $course->delete();
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Course deleted successfully'
-        ], 200);
-    }
-
-    public function CollegeDelete(Request $request, $id)
-    {
-        $collegeAdmin = Auth::guard('collegeadmin')->user();
-
-        if (!$collegeAdmin) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Unauthorized'
-            ], 401);
-        }
-
-        $college = Colleges::where('id', $id)
-            ->where('college_admin_id', $collegeAdmin->id)
-            ->first();
-
-        if (!$college) {
-            return response()->json([
-                'status' => false,
-                'message' => 'College not found or access denied'
-            ], 404);
-        }
-
-        $college->delete();
-
-        return response()->json([
-            'status' => true,
-            'message' => 'College deleted successfully'
-        ], 200);
-    }
-
+    /**
+     * Logout College Admin.
+     */
     public function logout(Request $request)
     {
         Auth::guard('collegeadmin')->logout();
