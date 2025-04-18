@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class AboutUsController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function AboutUsIndex(){
         $totalColleges = Colleges::count();
         $totalStudents = User::count();
