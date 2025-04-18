@@ -45,22 +45,22 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-        // 'admin' => [
-        //     'driver' => 'session',
-        //     'provider' => 'admins',
-        // ],
-        // 'collegeadmin' => [
-        //     'driver' => 'session',
-        //     'provider' => 'collegeadmins',
-        // ],
         'admin' => [
-            'driver' => 'jwt',
+            'driver' => 'session',
             'provider' => 'admins',
         ],
         'collegeadmin' => [
-            'driver' => 'jwt',
+            'driver' => 'session',
             'provider' => 'collegeadmins',
         ],
+        // 'admin' => [
+        //     'driver' => 'jwt',
+        //     'provider' => 'admins',
+        // ],
+        // 'collegeadmin' => [
+        //     'driver' => 'jwt',
+        //     'provider' => 'collegeadmins',
+        // ],
     ],
 
 

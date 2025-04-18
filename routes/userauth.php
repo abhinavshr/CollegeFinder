@@ -4,6 +4,7 @@ use App\Http\Controllers\User\AboutUsController;
 use App\Http\Controllers\User\CollegeDetailsController;
 use App\Http\Controllers\User\ComparisonController;
 use App\Http\Controllers\User\ContactUsController;
+use App\Http\Controllers\User\FavouriteCollegeController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ReviewsController;
 use App\Http\Controllers\User\SearchCollegeController;
@@ -37,4 +38,5 @@ Route::name('user.')->middleware(['auth:web'])->group(function () {
     Route::put('profile/personal-update', [UserProfileController::class, 'profilePersonalUpdate'])->name('profile.personalupdate');
     Route::put('profile/password-update', [UserProfileController::class, 'profilePasswordUpdate'])->name('profile.passwordupdate');
     Route::delete('profile/delete', [UserProfileController::class, 'profileDelete'])->name('profile.delete');
+    Route::get('favouritecollege', [FavouriteCollegeController::class, 'favouriteCollegeIndex'])->name('favouritecollege');
 });

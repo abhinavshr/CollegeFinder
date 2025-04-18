@@ -27,6 +27,7 @@
                     </div>
                     <div id="dropdown-content" class="dropdown-content">
                         <a href="{{ route('user.profile') }}">Profile</a>
+                        <a href="{{ route('user.favouritecollege') }}">My Favourite Colleges</a>
                         <a href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
                         <form id="logout-form" action="{{ route('user.userlogout') }}" method="POST"
                             style="display: none;">

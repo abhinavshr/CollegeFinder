@@ -50,9 +50,10 @@ class SearchCollegeController extends Controller
 
         $locations = Colleges::select('location')->distinct()->pluck('location');
         $cities = Colleges::select('city')->distinct()->pluck('city');
+        $favorites = Favorite::where('user_id', auth()->id())->pluck('college_id');
         $coureses = Courses::all();
 
-        return view('users.searchcollege', compact('colleges', 'locations', 'cities', 'coureses'));
+        return view('users.searchcollege', compact('colleges', 'locations', 'cities', 'coureses', 'favorites'));
     }
 
     public function toggleFavorite(Request $request)

@@ -27,15 +27,15 @@
         </tr>
       </thead>
       <tbody>
-        @forelse ($scholarships as $scholarships)
+        @forelse ($scholarships as $scholarship)
         <tr>
-          <td>{{ $scholarships->id }}</td>
-          <td>{{ $scholarships->scholarship_name }}</td>
-          <td>{{ $scholarships->college->name }}</td>
+          <td>{{ $scholarship->id }}</td>
+          <td>{{ $scholarship->scholarship_name }}</td>
+          <td>{{ $scholarship->college->name }}</td>
           <td>
             @auth('collegeadmin')
-              <a href=" {{ route('collegeadmin.scholarshipdetail', $scholarships->id) }} " style="text-decoration: none;" class="action-btn edit-btn">Edit</a>
-              <form action=" {{ route('collegeadmin.scholarships.destroy', $scholarships->id) }} " method="POST" onsubmit="return confirm('Are you sure you want to delete this course?');">
+              <a href=" {{ route('collegeadmin.scholarshipdetail', $scholarship->id) }} " style="text-decoration: none;" class="action-btn edit-btn">Edit</a>
+              <form action=" {{ route('collegeadmin.scholarships.destroy', $scholarship->id) }} " method="POST" onsubmit="return confirm('Are you sure you want to delete this scholarship?');">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="action-btn delete-btn">Delete</button>
@@ -55,3 +55,4 @@
   </div>
 </body>
 </html>
+

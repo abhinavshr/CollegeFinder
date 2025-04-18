@@ -48,10 +48,10 @@ class ScholarshipController extends Controller
         return redirect()->back()->with('success', 'Scholarship deleted successfully.');
     }
 
-    public function scholarshipdetails(){
-        $scholarships = Scholarships::all();
+    public function scholarshipdetails($id){
+        $scholarship = Scholarships::findOrFail($id);
         $colleges = Colleges::all();
-        return view('collegeadmin.editscholarship', compact('scholarships', 'colleges'));
+        return view('collegeadmin.editscholarship', compact('scholarship', 'colleges'));
     }
 
     public function update(Request $request, $id)
