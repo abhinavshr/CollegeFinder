@@ -105,9 +105,15 @@
                 @csrf
                 @method('PUT')
                 <div class="password-section">
-                    <input type="password" id="password" name="password" placeholder="Enter Password" required>
+                    <input type="password" id="password" name="password" placeholder="Enter Password">
+                    @error('password')
+                    <p class="error">{{ $message }}</p>
+                    @enderror
                     <input type="password" id="password_confirmation" name="password_confirmation"
-                        placeholder="Confirm Password" required>
+                        placeholder="Confirm Password">
+                    @error('password_confirmation')
+                    <p class="error">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="buttons">
                     <button type="submit" class="update-btn">Update</button>

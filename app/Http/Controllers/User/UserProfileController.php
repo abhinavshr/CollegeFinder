@@ -48,8 +48,8 @@ class UserProfileController extends Controller
     public function profilePersonalUpdate(Request $request)
     {
         $request->validate([
-            'firstname' => 'string|min:6',
-            'lastname' => 'string|min:6',
+            'firstname' => 'string|min:3',
+            'lastname' => 'string|min:3',
             'date_of_birth' => 'date',
             'email' => 'string|email|unique:users,email,' . auth()->id(),
         ]);

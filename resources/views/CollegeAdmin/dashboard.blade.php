@@ -90,6 +90,7 @@
                             options: {
                                 responsive: true,
                                 maintainAspectRatio: false,
+                                aspectRatio: 1.5,
                                 animation: {
                                     duration: 1800,
                                     easing: 'easeOutQuart',
@@ -136,7 +137,7 @@
                                     },
                                     y: {
                                         beginAtZero: true,
-                                        suggestedMax: Math.max(10, ...filteredData) * 1.4,
+                                        suggestedMax: Math.max(10, ...filteredData) * 1,
                                         grid: {
                                             color: 'rgba(0, 86, 179, 0.2)',
                                             lineWidth: 1,
