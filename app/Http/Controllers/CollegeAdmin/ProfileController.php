@@ -17,7 +17,7 @@ class ProfileController extends Controller
     public function profileupdate(Request $request)
     {
         $request->validate([
-            'admin_profile' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
+            'admin_profile' => 'nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         $collegeadmin = CollegeAdmin::find(auth()->guard('collegeadmin')->id());

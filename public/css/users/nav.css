@@ -16,6 +16,7 @@ body {
     align-items: center;
     padding: 0 20px;
     height: 60px;
+    position: relative;
 }
 
 .brand {
@@ -26,13 +27,9 @@ body {
 }
 
 .nav-links {
-    text-align: center;
     list-style: none;
-}
-
-.nav-links li {
-    display: inline-block;
-    margin: 0 20px;
+    display: flex;
+    gap: 20px;
 }
 
 .nav-links li a {
@@ -46,11 +43,59 @@ body {
     color: #FFD700;
 }
 
+.nav-links li a.active {
+    color: #FFD700;
+    font-weight: bold;
+    border-bottom: 2px solid #FFD700;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+}
+
+.drawer {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #0056B3;
+    z-index: 99;
+}
+
+.drawer ul {
+    list-style: none;
+    padding: 0;
+}
+
+.drawer li {
+    text-align: center;
+    padding: 12px 0;
+}
+
+.drawer a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.drawer a:hover {
+    background-color: #004494;
+}
+
+.show-drawer {
+    display: flex !important;
+}
+
 .profile-icon {
-    text-align: right;
     background-color: #FFFFFF;
     border-radius: 50%;
     border: 1px solid #FFD700;
+    overflow: hidden;
 }
 
 .icon {
@@ -81,12 +126,6 @@ body {
     background-color: #E0A800;
 }
 
-.nav-links li a.active {
-    color: #FFD700;
-    font-weight: bold;
-    border-bottom: 2px solid #FFD700;
-}
-
 .dropdown {
     position: relative;
     display: inline-block;
@@ -102,8 +141,7 @@ body {
     border-radius: 5px;
     z-index: 100;
     padding: 10px;
-    right: 0; /* Default position to prevent overflow */
-    left: auto;
+    right: 0;
 }
 
 .dropdown-content a {
@@ -111,7 +149,7 @@ body {
     padding: 10px;
     text-decoration: none;
     display: block;
-    white-space: nowrap; /* Prevents text from wrapping */
+    white-space: nowrap;
 }
 
 .dropdown-content a:hover {
@@ -120,4 +158,19 @@ body {
 
 .show {
     display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .profile-icon,
+    .login-btn {
+        display: none;
+    }
 }

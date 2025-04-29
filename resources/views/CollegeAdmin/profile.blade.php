@@ -26,6 +26,9 @@
                     @csrf
                     @method('PUT')
                     <input type="file" id="upload-image" name="admin_profile" accept="image/*">
+                    @error('admin_profile')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
                     <button class="upload-btn" type="submit">Upload</button>
                 </form>
             </div>
