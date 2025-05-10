@@ -18,10 +18,23 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
         'email',
+        'date_of_birth',
         'password',
+        'profile_picture',
+        'user_type',
     ];
+
+    protected static function booted() {
+        static::created(function ($user) {
+            RecentActivity::create([
+                'activity_type' => 'New User Registered',
+                'message' => 'New user "' . $user->firstname . $user->lastname . '" registered.',
+            ]);
+        });
+    }
 
     /**
      * The attributes that should be hidden for serialization.

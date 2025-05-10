@@ -1,0 +1,120 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.footer {
+    background: #0056B3;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+}
+
+.footer-section {
+    padding: 20px;
+    min-width: 250px;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+p {
+    font-size: 18px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 8px 0;
+}
+
+ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+.social-icons {
+    margin-top: 10px;
+    color: #FFFFFF;
+}
+
+.social-icons a {
+    color: white;
+    margin: 0 10px;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid white;
+    font-size: 14px;
+}
+
+/* Initial link styles */
+.footer-section a,
+.social-icons a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.5s; /* Delays to sync with footer fade-in */
+    transition: color 0.3s ease-in-out;
+}
+
+/* Hover effect: smooth color change */
+.footer-section a:hover,
+.social-icons a:hover {
+    color: #FFD700; /* Golden hover effect */
+}
+
+/* Animated underline effect */
+.footer-section a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    background-color: #FFD700; /* Matches hover color */
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in-out;
+}
+
+.footer-section a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
